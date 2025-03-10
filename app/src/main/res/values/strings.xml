@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TaskApp</string>
+
+    <!--  SLASH SCREEN  -->
+    <string name="logo_description">Task App Logo, a circle with a check mark!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
