@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">TaskApp</string>
 
-    <!--  SLASH SCREEN  -->
+    <!--  SPLASH SCREEN  -->
     <string name="logo_description">Task App Logo, a circle with a check mark!</string>
+
+    <!--  AUTH SCREENS  -->
+    <string name="input_email_label">E-mail</string>
+    <string name="input_email_hint">Digite seu e-mail</string>
+    <string name="input_password_label">Senha</string>
+    <string name="input_password_hint">Digite sua senha</string>
+    <string name="button_login_label">Login</string>
+    <string name="button_register_label">Ainda não tem conta? Registre-se</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

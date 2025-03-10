@@ -1,4 +1,7 @@
 <resources>
     <style name="Base.Theme.TaskApp" parent="Theme.Material3.DayNight.NoActionBar" />
-    <style name="Theme.TaskApp" parent="Base.Theme.TaskApp" />
+    <style name="Theme.TaskApp" parent="Base.Theme.TaskApp">
+        <item name="colorPrimary">@color/green</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
 </resources>
