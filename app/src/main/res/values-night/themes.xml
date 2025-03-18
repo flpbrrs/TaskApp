@@ -1,3 +1,8 @@
 <resources>
     <style name="Base.Theme.TaskApp" parent="Theme.Material3.DayNight.NoActionBar" />
+
+    <style name="CustomTabItem" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
