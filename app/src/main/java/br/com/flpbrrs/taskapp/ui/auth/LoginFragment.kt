@@ -15,6 +15,10 @@ class LoginFragment : GenericFragment<FragmentLoginBinding>(FragmentLoginBinding
     }
 
     private fun initListeners() {
+        binding.loginButton.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        }
+
         binding.registerButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
