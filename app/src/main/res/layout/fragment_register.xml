@@ -21,7 +21,7 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout
@@ -126,11 +126,11 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
+            style="@style/PrimaryButtonStyle"
             android:layout_width="300dp"
             android:layout_height="52dp"
             android:layout_gravity="center"
-            android:text="@string/button_register_label"
-            android:textSize="16sp" />
+            android:text="@string/button_register_label"/>
 
     </LinearLayout>
 

@@ -93,11 +93,11 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
+            style="@style/PrimaryButtonStyle"
             android:layout_width="300dp"
             android:layout_height="52dp"
             android:layout_gravity="center"
-            android:text="@string/button_login_label"
-            android:textSize="16sp" />
+            android:text="@string/button_login_label" />
 
         <TextView
             android:id="@+id/register_button"

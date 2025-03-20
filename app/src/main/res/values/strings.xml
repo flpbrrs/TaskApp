@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">TaskApp</string>
 
+    <!--  BUTTONS  -->
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_save">Salvar</string>
+    <string name="btn_add_task">Adicionar nova task</string>
+
     <!--  SPLASH SCREEN  -->
     <string name="logo_description">Task App Logo, a circle with a check mark!</string>
 
@@ -23,6 +28,14 @@
     <string name="tab_title_doing">Fazendo</string>
     <string name="tab_title_done">Finalizado</string>
     <string name="tabs_accessibility_label">Navegação entre abas: To Do, Doing, Done</string>
+
+    <!--  HOME SCREEN  -->
+    <string name="form_task_title">Qual a nova tarefa?</string>
+    <string name="form_task_input_task_title">Título</string>
+    <string name="form_task_input_task_hint">Digite o título da sua task</string>
+    <string name="form_task_input_task_description">Descrição</string>
+    <string name="form_task_input_task_description_hint">Adicione alguns detalhes...</string>
+    <string name="form_task_input_task_status">Status</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
