@@ -5,12 +5,20 @@ import android.view.View
 import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.adapters.ViewPagerAdapter
 import br.com.flpbrrs.taskapp.databinding.FragmentHomeBinding
+import br.com.flpbrrs.taskapp.utils.showBottomSheetContainerFor
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment : GenericFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTabs()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.fabAddTask.setOnClickListener {
+            showBottomSheetContainerFor(FormTaskFragment())
+        }
     }
 
     private fun initTabs() {
