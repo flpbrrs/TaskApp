@@ -6,6 +6,7 @@ import android.widget.Toast
 import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.databinding.FragmentFormTaskBinding
 import br.com.flpbrrs.taskapp.utils.dismissBottomSheet
+import br.com.flpbrrs.taskapp.utils.showBottomSheet
 
 class FormTaskFragment : GenericFragment<FragmentFormTaskBinding>(FragmentFormTaskBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,12 +29,7 @@ class FormTaskFragment : GenericFragment<FragmentFormTaskBinding>(FragmentFormTa
         val description = binding.descriptionInput.toString().trim()
 
         if(title.isEmpty() || description.isEmpty()) {
-            Toast.makeText(
-                requireContext(),
-                R.string.form_task_invalid_data,
-                Toast.LENGTH_SHORT
-            ).show()
-
+            showBottomSheet(message = getString(R.string.form_task_invalid_data))
             return false
         }
 

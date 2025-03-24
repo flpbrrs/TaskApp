@@ -42,5 +42,10 @@
     <string name="form_task_input_task_status">Status</string>
     <string name="form_task_invalid_data">Informações insuficientes para criar uma task</string>
 
+    <!--  BOTTOM SHEET COMPONENT  -->
+    <string name="bottom_sheet_component_title">Atenção</string>
+    <string name="bottom_sheet_component_content_placeholder">CONTEUDO</string>
+    <string name="bottom_sheet_component_confirm_button">Entendido</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

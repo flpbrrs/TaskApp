@@ -7,6 +7,7 @@ import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.databinding.FragmentRegisterBinding
 import br.com.flpbrrs.taskapp.ui.GenericFragment
 import br.com.flpbrrs.taskapp.utils.initToolbar
+import br.com.flpbrrs.taskapp.utils.showBottomSheet
 
 class RegisterFragment : GenericFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
@@ -29,18 +30,9 @@ class RegisterFragment : GenericFragment<FragmentRegisterBinding>(FragmentRegist
         val confirmPassword = binding.confirmPasswordInput.text.toString().trim()
 
         if(username.isEmpty() || email.isEmpty() || confirmPassword.isEmpty())
-            Toast.makeText(
-                requireContext(),
-                R.string.dados_registros_invalidos,
-                Toast.LENGTH_SHORT
-            ).show()
-
+            showBottomSheet(message = getString(R.string.dados_registros_invalidos))
 
         if(confirmPassword != password)
-            Toast.makeText(
-                requireContext(),
-                R.string.senha_diferentes,
-                Toast.LENGTH_SHORT
-            ).show()
+            showBottomSheet(message = getString(R.string.senha_diferentes))
     }
 }

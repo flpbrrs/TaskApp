@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.databinding.FragmentLoginBinding
 import br.com.flpbrrs.taskapp.ui.GenericFragment
+import br.com.flpbrrs.taskapp.utils.showBottomSheet
 
 class LoginFragment : GenericFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
@@ -33,12 +34,7 @@ class LoginFragment : GenericFragment<FragmentLoginBinding>(FragmentLoginBinding
         val password = binding.passwordInput.text.toString().trim()
 
         if(email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(
-                requireContext(),
-                R.string.credenciais_login_invalidas,
-                Toast.LENGTH_SHORT
-            ).show()
-
+            showBottomSheet(message = getString(R.string.credenciais_login_invalidas))
             return false
         }
         return true
