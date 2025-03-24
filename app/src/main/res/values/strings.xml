@@ -22,6 +22,9 @@
     <string name="button_register_label">Registre-se</string>
     <string name="button_register_label_link">Ainda não tem conta? Registre-se</string>
     <string name="toolbar_register_title">Cadastre sua conta</string>
+    <string name="credenciais_login_invalidas">Credenciais inválidas</string>
+    <string name="dados_registros_invalidos">Preencha suas informações</string>
+    <string name="senha_diferentes">As senhas devem ser iguais</string>
 
     <!--  HOME SCREEN  -->
     <string name="button_logout_label">Logout</string>
@@ -37,7 +40,7 @@
     <string name="form_task_input_task_description">Descrição</string>
     <string name="form_task_input_task_description_hint">Adicione alguns detalhes…</string>
     <string name="form_task_input_task_status">Status</string>
-
+    <string name="form_task_invalid_data">Informações insuficientes para criar uma task</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

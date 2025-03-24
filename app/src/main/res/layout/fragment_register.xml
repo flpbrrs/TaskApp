@@ -145,7 +145,7 @@
             tools:targetApi="o" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_button"
+            android:id="@+id/register_button"
             style="@style/PrimaryButtonStyle"
             android:layout_width="300dp"
             android:layout_height="52dp"
