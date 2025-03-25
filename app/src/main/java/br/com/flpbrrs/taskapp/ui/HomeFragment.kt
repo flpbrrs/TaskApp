@@ -16,21 +16,23 @@ class HomeFragment : GenericFragment<FragmentHomeBinding>(FragmentHomeBinding::i
         initListeners()
     }
 
-    private fun initListeners() {
-        binding.fabAddTask.setOnClickListener {
+    private fun initListeners() = with(binding) {
+        fabAddTask.setOnClickListener {
             showBottomSheetContainerFor(FormTaskFragment())
         }
     }
 
     private fun initTabs() {
-        val pagerAdapter = ViewPagerAdapter(requireActivity())
-        binding.viewPager.adapter = pagerAdapter
+        val pagerAdapter = ViewPagerAdapter(requireActivity()).apply {
+            addFragment(TodoFragment(), R.string.tab_title_todo)
+            addFragment(DoingFragment(), R.string.tab_title_doing)
+            addFragment(DoneFragment(), R.string.tab_title_done)
+        }
 
-        pagerAdapter.addFragment(TodoFragment(), R.string.tab_title_todo)
-        pagerAdapter.addFragment(DoingFragment(), R.string.tab_title_doing)
-        pagerAdapter.addFragment(DoneFragment(), R.string.tab_title_done)
-
-        binding.viewPager.offscreenPageLimit = pagerAdapter.itemCount
+        with(binding) {
+            viewPager.adapter = pagerAdapter
+            viewPager.offscreenPageLimit = pagerAdapter.itemCount
+        }
 
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = getString(pagerAdapter.getTitle(position))

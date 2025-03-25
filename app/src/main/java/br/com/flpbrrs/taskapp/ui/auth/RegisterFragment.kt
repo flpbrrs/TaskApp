@@ -8,7 +8,8 @@ import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.utils.initToolbar
 import br.com.flpbrrs.taskapp.utils.showBottomSheet
 
-class RegisterFragment : GenericFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
+class RegisterFragment :
+    GenericFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -16,10 +17,8 @@ class RegisterFragment : GenericFragment<FragmentRegisterBinding>(FragmentRegist
         initListeners()
     }
 
-    private fun initListeners() {
-        binding.registerButton.setOnClickListener {
-            validateData()
-        }
+    private fun initListeners() = with(binding) {
+        registerButton.setOnClickListener { validateData() }
     }
 
     private fun validateData() {
@@ -28,10 +27,10 @@ class RegisterFragment : GenericFragment<FragmentRegisterBinding>(FragmentRegist
         val password = binding.passwordInput.text.toString().trim()
         val confirmPassword = binding.confirmPasswordInput.text.toString().trim()
 
-        if(username.isEmpty() || email.isEmpty() || confirmPassword.isEmpty())
+        if (username.isEmpty() || email.isEmpty() || confirmPassword.isEmpty())
             showBottomSheet(message = getString(R.string.dados_registros_invalidos))
 
-        if(confirmPassword != password)
+        if (confirmPassword != password)
             showBottomSheet(message = getString(R.string.senha_diferentes))
     }
 }

@@ -15,27 +15,28 @@ class LoginFragment : GenericFragment<FragmentLoginBinding>(FragmentLoginBinding
         initListeners()
     }
 
-    private fun initListeners() {
-        binding.loginButton.setOnClickListener {
+    private fun initListeners() = with(binding) {
+        loginButton.setOnClickListener {
             val modelIsValid = validateData()
 
-            if(modelIsValid)
+            if (modelIsValid)
                 findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
-        binding.registerButton.setOnClickListener {
+        registerButton.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
 
-    private fun validateData():Boolean {
-        val email = binding.emailInput.text.toString().trim()
-        val password = binding.passwordInput.text.toString().trim()
+    private fun validateData(): Boolean = with(binding) {
+        val email = emailInput.text.toString().trim()
+        val password = passwordInput.text.toString().trim()
 
-        if(email.isEmpty() || password.isEmpty()) {
+        return if (email.isNotEmpty() && password.isNotEmpty()) true
+        else {
             showBottomSheet(message = getString(R.string.credenciais_login_invalidas))
             return false
         }
-        return true
     }
+
 }

@@ -14,25 +14,19 @@ class FormTaskFragment : GenericFragment<FragmentFormTaskBinding>(FragmentFormTa
         initListeners()
     }
 
-    private fun initListeners() {
-        binding.btnSave.setOnClickListener {
-            validateData()
-        }
-
-        binding.btnCancel.setOnClickListener {
-            dismissBottomSheet()
-        }
+    private fun initListeners() = with(binding) {
+        btnSave.setOnClickListener { validateData() }
+        btnCancel.setOnClickListener { dismissBottomSheet() }
     }
 
-    private fun validateData(): Boolean {
-        val title = binding.titleInput.text.toString().trim()
-        val description = binding.descriptionInput.toString().trim()
+    private fun validateData(): Boolean = with(binding) {
+        val title = titleInput.text.toString().trim()
+        val description = descriptionInput.text.toString().trim()
 
-        if(title.isEmpty() || description.isEmpty()) {
+        return if(title.isNotEmpty() && description.isNotEmpty()) true
+        else {
             showBottomSheet(message = getString(R.string.form_task_invalid_data))
-            return false
+            false
         }
-
-        return true
     }
 }
