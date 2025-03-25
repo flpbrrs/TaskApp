@@ -2,11 +2,10 @@ package br.com.flpbrrs.taskapp.ui.auth
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.databinding.FragmentLoginBinding
-import br.com.flpbrrs.taskapp.ui.GenericFragment
+import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.utils.showBottomSheet
 
 class LoginFragment : GenericFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {

@@ -2,8 +2,8 @@ package br.com.flpbrrs.taskapp.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import br.com.flpbrrs.taskapp.R
+import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.databinding.FragmentFormTaskBinding
 import br.com.flpbrrs.taskapp.utils.dismissBottomSheet
 import br.com.flpbrrs.taskapp.utils.showBottomSheet

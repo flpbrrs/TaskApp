@@ -1,4 +1,4 @@
-package br.com.flpbrrs.taskapp.ui
+package br.com.flpbrrs.taskapp.components
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

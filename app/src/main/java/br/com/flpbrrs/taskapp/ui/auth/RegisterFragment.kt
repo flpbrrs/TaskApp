@@ -2,10 +2,9 @@ package br.com.flpbrrs.taskapp.ui.auth
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.databinding.FragmentRegisterBinding
-import br.com.flpbrrs.taskapp.ui.GenericFragment
+import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.utils.initToolbar
 import br.com.flpbrrs.taskapp.utils.showBottomSheet
 

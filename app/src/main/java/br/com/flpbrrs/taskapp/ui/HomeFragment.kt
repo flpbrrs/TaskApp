@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.adapters.ViewPagerAdapter
+import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.databinding.FragmentHomeBinding
 import br.com.flpbrrs.taskapp.utils.showBottomSheetContainerFor
 import com.google.android.material.tabs.TabLayoutMediator

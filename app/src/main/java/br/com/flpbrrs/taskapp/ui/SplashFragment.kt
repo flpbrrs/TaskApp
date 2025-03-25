@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import br.com.flpbrrs.taskapp.R
+import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.databinding.FragmentSplashBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
