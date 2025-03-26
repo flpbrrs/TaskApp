@@ -5,6 +5,7 @@
     <string name="btn_cancel">Cancelar</string>
     <string name="btn_save">Salvar</string>
     <string name="btn_add_task">Adicionar nova task</string>
+    <string name="btn_confirm">Confirmar</string>
 
     <!--  SPLASH SCREEN  -->
     <string name="logo_description">Task App Logo, a circle with a check mark!</string>
@@ -32,6 +33,7 @@
     <string name="tab_title_doing">Fazendo</string>
     <string name="tab_title_done">Finalizado</string>
     <string name="tabs_accessibility_label">Navegação entre abas: To Do, Doing, Done</string>
+    <string name="logout_message">Deseja realmente sair da aplicação?</string>
 
     <!--  FORM TASK SCREEN  -->
     <string name="form_task_title">Qual a nova tarefa?</string>
