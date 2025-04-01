@@ -3,7 +3,9 @@ package br.com.flpbrrs.taskapp.ui
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.components.GenericAdapter
 import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.data.model.Task
@@ -11,12 +13,26 @@ import br.com.flpbrrs.taskapp.data.model.TaskDiffCallback
 import br.com.flpbrrs.taskapp.data.model.TaskStatus
 import br.com.flpbrrs.taskapp.databinding.ComponentTaskItemBinding
 import br.com.flpbrrs.taskapp.databinding.FragmentTodoBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::inflate) {
     private lateinit var taskAdapter: GenericAdapter<Task>
 
+    private lateinit var databaseRef: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        databaseRef = Firebase.database.reference
+        auth = Firebase.auth
 
         initRecyclerView()
     }
@@ -31,11 +47,19 @@ class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::i
                 cardDescription.text = task.description
 
                 cardOptions.setOnClickListener {
-                    Toast.makeText(requireContext(), "TESTE OPTIONS ${task.title}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "TESTE OPTIONS ${task.title}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 cardDescription.setOnClickListener {
-                    Toast.makeText(requireContext(), "TESTE DETAILS ${task.title}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "TESTE DETAILS ${task.title}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -46,22 +70,43 @@ class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::i
             adapter = taskAdapter
         }
 
-        taskAdapter.submitList(getTasks())
+        getTasks()
     }
 
-    private fun getTasks() = listOf(
-        Task(
-            id = "3",
-            description = "Redirecionador para o aplicativo Whatsapp dentro do app",
-            title = "Implementar redirecionador",
-            TaskStatus.TODO
-        ),
-        Task(
-            id = "6",
-            description = "Adicionar campo de data na tela de controle",
-            title = "Adição de campo",
-            TaskStatus.TODO
-        ),
-    )
+    private fun getTasks() {
+        auth.currentUser?.let {
+            databaseRef
+                .child("tasks")
+                .child(it.uid)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val taskList = mutableListOf<Task>()
+                        for (ds in snapshot.children) {
+                            val task = ds.getValue(Task::class.java) as Task
+                            if(task.status === TaskStatus.TODO)
+                                taskList.add(task)
+                        }
+                        updateIndicatorBy(taskList)
+                        taskAdapter.submitList(taskList)
+                    }
 
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.generic_message_error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+        }
+    }
+
+    private fun updateIndicatorBy(list: List<Task>) {
+        binding.textInfo.text = if(list.isEmpty()) {
+            getString(R.string.list_empty)
+        } else {
+            ""
+        }
+        binding.progressBar.isVisible = false
+    }
 }
