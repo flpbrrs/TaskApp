@@ -2,7 +2,6 @@ package br.com.flpbrrs.taskapp.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +13,7 @@ import br.com.flpbrrs.taskapp.data.model.TaskDiffCallback
 import br.com.flpbrrs.taskapp.data.model.TaskStatus
 import br.com.flpbrrs.taskapp.databinding.ComponentTaskItemBinding
 import br.com.flpbrrs.taskapp.databinding.FragmentTodoBinding
+import br.com.flpbrrs.taskapp.utils.openPopupFor
 import br.com.flpbrrs.taskapp.utils.showBottomSheet
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -48,23 +48,19 @@ class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::i
                 cardTitle.text = task.title
                 cardDescription.text = task.description
 
-                cardOptions.setOnClickListener { it ->
-                    PopupMenu(requireContext(), it).apply {
-                        menuInflater.inflate(R.menu.task_item_menu, this.menu)
-                        setOnMenuItemClickListener {
-                            when(it.itemId) {
-                                R.id.edit -> editTask(task)
-                                R.id.delete -> showBottomSheet(
-                                    onClick = { deleteTask(task) },
-                                    buttonLabel = R.string.btn_confirm,
-                                    message = getString(R.string.delete_task_message)
-                                )
-                            }
-                            true
+                cardOptions.setOnClickListener {
+                    openPopupFor(it, R.menu.task_item_menu) { item ->
+                        when (item.itemId) {
+                            R.id.edit -> editTask(task)
+                            R.id.delete -> showBottomSheet(
+                                onClick = { deleteTask(task) },
+                                buttonLabel = R.string.btn_confirm,
+                                message = getString(R.string.delete_task_message)
+                            )
                         }
-                        show()
                     }
                 }
+
             }
         }
 
@@ -85,9 +81,9 @@ class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::i
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val taskList = mutableListOf<Task>()
-                        for (ds in snapshot.children) {
+                        snapshot.children.forEach { ds ->
                             val task = ds.getValue(Task::class.java) as Task
-                            if(task.status === TaskStatus.TODO)
+                            if (task.status === TaskStatus.TODO)
                                 taskList.add(task)
                         }
                         updateIndicatorBy(taskList)
@@ -107,7 +103,8 @@ class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::i
     }
 
     private fun moveTask(task: Task, destination: String) {
-        Toast.makeText(requireContext(), "Moving ${task.title} to $destination", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Moving ${task.title} to $destination", Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun editTask(task: Task) {
@@ -115,26 +112,26 @@ class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::i
     }
 
     private fun deleteTask(task: Task) {
-       auth.currentUser?.let {
-           databaseRef
-               .child("tasks")
-               .child(it.uid)
-               .child(task.id)
-               .removeValue()
-               .addOnCompleteListener { result ->
-                   if(!result.isSuccessful) {
-                       Toast.makeText(
-                           requireContext(),
-                           R.string.generic_message_error,
-                           Toast.LENGTH_SHORT
-                       ).show()
-                   }
-               }
-       }
+        auth.currentUser?.let {
+            databaseRef
+                .child("tasks")
+                .child(it.uid)
+                .child(task.id)
+                .removeValue()
+                .addOnCompleteListener { result ->
+                    if (!result.isSuccessful) {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.generic_message_error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
     }
 
     private fun updateIndicatorBy(list: List<Task>) {
-        binding.textInfo.text = if(list.isEmpty()) {
+        binding.textInfo.text = if (list.isEmpty()) {
             getString(R.string.list_empty)
         } else {
             ""

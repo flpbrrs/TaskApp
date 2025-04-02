@@ -1,5 +1,9 @@
 package br.com.flpbrrs.taskapp.utils
 
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -45,4 +49,19 @@ fun Fragment.showBottomSheet(
     }
     bottomSheetDialog.setContentView(binding.root)
     bottomSheetDialog.show()
+}
+
+fun Fragment.openPopupFor(
+    anchor: View,
+    menu: Int,
+    menuOptions: (item: MenuItem) -> Unit
+) {
+    PopupMenu(requireContext(), anchor).apply {
+        menuInflater.inflate(menu, this.menu)
+        setOnMenuItemClickListener {
+            menuOptions(it)
+            true
+        }
+        show()
+    }
 }
