@@ -7,19 +7,15 @@ import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.adapters.ViewPagerAdapter
 import br.com.flpbrrs.taskapp.components.GenericFragment
 import br.com.flpbrrs.taskapp.databinding.FragmentHomeBinding
+import br.com.flpbrrs.taskapp.utils.FirebaseHelper
 import br.com.flpbrrs.taskapp.utils.showBottomSheet
 import br.com.flpbrrs.taskapp.utils.showBottomSheetContainerFor
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class HomeFragment : GenericFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
-    private lateinit var auth: FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = Firebase.auth
         initTabs()
         initListeners()
     }
@@ -34,7 +30,7 @@ class HomeFragment : GenericFragment<FragmentHomeBinding>(FragmentHomeBinding::i
                 buttonLabel = R.string.btn_confirm,
                 message = getString(R.string.logout_message),
                 onClick = {
-                    auth.signOut()
+                    FirebaseHelper.getAuth().signOut()
                     findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
                 }
             )

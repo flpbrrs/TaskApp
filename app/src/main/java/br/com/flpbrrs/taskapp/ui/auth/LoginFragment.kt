@@ -2,22 +2,16 @@ package br.com.flpbrrs.taskapp.ui.auth
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import br.com.flpbrrs.taskapp.R
 import br.com.flpbrrs.taskapp.databinding.FragmentLoginBinding
 import br.com.flpbrrs.taskapp.components.GenericFragment
+import br.com.flpbrrs.taskapp.utils.FirebaseHelper
 import br.com.flpbrrs.taskapp.utils.showBottomSheet
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class LoginFragment : GenericFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
-    private lateinit var auth: FirebaseAuth
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = Firebase.auth
         initListeners()
     }
 
@@ -41,13 +35,16 @@ class LoginFragment : GenericFragment<FragmentLoginBinding>(FragmentLoginBinding
     }
 
     private fun loginUser(email: String, password: String) {
-        auth.signInWithEmailAndPassword(email, password)
+        FirebaseHelper.getAuth().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 } else {
-                    Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT)
-                        .show()
+                    showBottomSheet(
+                        message = getString(FirebaseHelper.validError(
+                            task.exception?.message.toString())
+                        )
+                    )
                 }
             }
     }
