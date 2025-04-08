@@ -9,7 +9,6 @@ class FirebaseHelper {
     companion object {
         fun getDatabase() = Firebase.database.reference
         fun getAuth() = FirebaseAuth.getInstance()
-        fun getCurrentUserId() = getAuth().currentUser?.uid ?: ""
         fun isAuthenticated() = getAuth().currentUser != null
         fun validError(error: String): Int {
             return when {
