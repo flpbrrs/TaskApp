@@ -39,6 +39,7 @@
 
     <!--  FORM TASK SCREEN  -->
     <string name="form_task_title">Qual a nova tarefa?</string>
+    <string name="form_task_edit_title">Editando tarefa…</string>
     <string name="form_task_input_task_title">Título</string>
     <string name="form_task_input_task_hint">Digite o título da sua task</string>
     <string name="form_task_input_task_description">Descrição</string>

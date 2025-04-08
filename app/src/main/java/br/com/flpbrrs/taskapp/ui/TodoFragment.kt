@@ -15,6 +15,7 @@ import br.com.flpbrrs.taskapp.databinding.ComponentTaskItemBinding
 import br.com.flpbrrs.taskapp.databinding.FragmentTodoBinding
 import br.com.flpbrrs.taskapp.utils.openPopupFor
 import br.com.flpbrrs.taskapp.utils.showBottomSheet
+import br.com.flpbrrs.taskapp.utils.showBottomSheetContainerFor
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -103,12 +104,11 @@ class TodoFragment : GenericFragment<FragmentTodoBinding>(FragmentTodoBinding::i
     }
 
     private fun moveTask(task: Task, destination: String) {
-        Toast.makeText(requireContext(), "Moving ${task.title} to $destination", Toast.LENGTH_SHORT)
-            .show()
+
     }
 
     private fun editTask(task: Task) {
-        Toast.makeText(requireContext(), "Editing ${task.title}", Toast.LENGTH_SHORT).show()
+        showBottomSheetContainerFor(FormTaskFragment.newInstance(task))
     }
 
     private fun deleteTask(task: Task) {
